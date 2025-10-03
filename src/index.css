@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern Design System with Glassmorphism */
+@layer base {
+  :root {
+    /* Modern Color Palette */
+    --background: 240 10% 3.9%;
+    --background-secondary: 240 8% 6%;
+    --foreground: 0 0% 98%;
+    
+    /* Primary - Modern Purple */
+    --primary: 263 70% 50%;
+    --primary-light: 263 70% 60%;
+    --primary-dark: 263 70% 40%;
+    --primary-foreground: 0 0% 98%;
+    
+    /* Secondary - Warm Amber */
+    --secondary: 38 92% 50%;
+    --secondary-light: 38 92% 60%;
+    --secondary-foreground: 0 0% 9%;
+    
+    /* Accent - Cyan */
+    --accent: 199 89% 48%;
+    --accent-light: 199 89% 58%;
+    --accent-foreground: 0 0% 9%;
+    
+    /* Neutral colors */
+    --muted: 240 5% 15%;
+    --muted-foreground: 240 5% 65%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --border: 240 6% 20%;
+    --input: 240 6% 20%;
+    --ring: 263 70% 50%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --radius: 1rem;
+    
+    /* Glassmorphism Variables */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --glass-backdrop: blur(16px);
+    
+    /* Modern Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-light)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--accent)) 100%);
+    --gradient-mesh: radial-gradient(circle at 20% 80%, hsl(var(--primary)) 0%, transparent 50%), 
+                     radial-gradient(circle at 80% 20%, hsl(var(--secondary)) 0%, transparent 50%),
+                     radial-gradient(circle at 40% 40%, hsl(var(--accent)) 0%, transparent 50%);
+    
+    /* Advanced Shadows */
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
+    --shadow-elegant: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-inner: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --background-secondary: 240 10% 98%;
+    --foreground: 240 10% 3.9%;
+    
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 5% 45%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-geist antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background: var(--gradient-mesh), hsl(var(--background));
+    background-attachment: fixed;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-satoshi font-semibold;
+  }
+}
+
+@layer components {
+  /* Modern Glass Buttons */
+  .btn-primary {
+    @apply relative overflow-hidden font-medium px-6 py-3 rounded-2xl;
+    background: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    box-shadow: var(--shadow-glow), var(--shadow-inner);
+    transition: var(--transition-spring);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow), 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-secondary {
+    @apply relative overflow-hidden font-medium px-6 py-3 rounded-2xl border;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border-color: var(--glass-border);
+    color: hsl(var(--foreground));
+    transition: var(--transition-spring);
+  }
+  
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  /* Glass Cards */
+  .card-glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--radius);
+    transition: var(--transition-smooth);
+  }
+  
+  .card-glass:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+  
+  .card-elegant {
+    @apply card-glass p-6;
+  }
+  
+  /* Text Effects */
+  .text-gradient {
+    background: var(--gradient-hero);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+  
+  /* Modern Animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  /* Glass Navigation */
+  .nav-glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Input Glass */
+  .input-glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--glass-border);
+    transition: var(--transition-smooth);
+  }
+  
+  .input-glass:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(-20px) rotate(-1deg); }
+}
+
+@keyframes glow {
+  from { 
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.2);
+    filter: brightness(1);
+  }
+  to { 
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.4), 0 0 60px hsl(var(--primary) / 0.2);
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(50px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-10px);
+  }
+  70% {
+    transform: scale(0.9) translateY(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/50;
+}
