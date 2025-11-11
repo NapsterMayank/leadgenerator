@@ -1,36 +1,42 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useAuth } from '@/contexts/AuthContext';
-import { Eye, EyeOff, Mail, Lock, AlertCircle } from 'lucide-react';
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useAuth } from "@/contexts/AuthContext";
+import { Eye, EyeOff, Mail, Lock, AlertCircle } from "lucide-react";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const { login } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setIsLoading(true);
 
     try {
       await login(email, password);
-      router.push('/dashboard');
+      router.push("/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      setError(err instanceof Error ? err.message : "Login failed");
     } finally {
       setIsLoading(false);
     }
@@ -38,7 +44,7 @@ const Login: React.FC = () => {
 
   const handleGoogleLogin = () => {
     // Placeholder for Google OAuth integration
-    alert('Google OAuth integration coming soon!');
+    alert("Google OAuth integration coming soon!");
   };
 
   return (
@@ -92,7 +98,7 @@ const Login: React.FC = () => {
                   <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -117,8 +123,8 @@ const Login: React.FC = () => {
 
               <div className="flex items-center justify-between">
                 <div className="text-sm">
-                  <Link 
-                    href="/auth/forgot-password" 
+                  <Link
+                    href="/auth/forgot-password"
                     className="text-primary hover:text-primary/80 transition-colors"
                   >
                     Forgot password?
@@ -126,12 +132,12 @@ const Login: React.FC = () => {
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
-                className="w-full btn-primary" 
+              <Button
+                type="submit"
+                className="w-full btn-primary"
                 disabled={isLoading}
               >
-                {isLoading ? 'Signing in...' : 'Sign in'}
+                {isLoading ? "Signing in..." : "Sign in"}
               </Button>
             </form>
 
@@ -146,9 +152,9 @@ const Login: React.FC = () => {
               </div>
             </div>
 
-            <Button 
-              variant="outline" 
-              className="w-full" 
+            <Button
+              variant="outline"
+              className="w-full"
               onClick={handleGoogleLogin}
             >
               <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -173,9 +179,9 @@ const Login: React.FC = () => {
             </Button>
 
             <div className="text-center text-sm text-muted-foreground">
-              Don't have an account?{' '}
-              <Link 
-                href="/auth/signup" 
+              Don't have an account?{" "}
+              <Link
+                href="/auth/signup"
                 className="text-primary hover:text-primary/80 transition-colors font-medium"
               >
                 Sign up for free
@@ -184,9 +190,12 @@ const Login: React.FC = () => {
 
             {/* Demo Credentials */}
             <div className="mt-6 p-4 bg-muted/50 rounded-lg">
-              <p className="text-sm font-medium text-center mb-2">Demo Credentials</p>
+              <p className="text-sm font-medium text-center mb-2">
+                Demo Credentials
+              </p>
               <p className="text-xs text-muted-foreground text-center">
-                Email: user@example.com<br />
+                Email: user@example.com
+                <br />
                 Password: password
               </p>
             </div>
@@ -194,11 +203,11 @@ const Login: React.FC = () => {
         </Card>
 
         <div className="mt-8 text-center text-xs text-muted-foreground">
-          By signing in, you agree to our{' '}
+          By signing in, you agree to our{" "}
           <Link href="#" className="text-primary hover:text-primary/80">
             Terms of Service
-          </Link>{' '}
-          and{' '}
+          </Link>{" "}
+          and{" "}
           <Link href="#" className="text-primary hover:text-primary/80">
             Privacy Policy
           </Link>

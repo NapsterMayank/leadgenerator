@@ -99,7 +99,7 @@ const config: Config = {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
         },
-        "float": {
+        float: {
           "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
           "33%": { transform: "translateY(-10px) rotate(1deg)" },
           "66%": { transform: "translateY(-20px) rotate(-1deg)" },
@@ -123,7 +123,7 @@ const config: Config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "gradient-shift": "gradient-shift 3s ease infinite",
-        "float": "float 6s ease-in-out infinite",
+        float: "float 6s ease-in-out infinite",
         "pulse-slow": "pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "slide-up": "slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
         "bounce-in": "bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)",

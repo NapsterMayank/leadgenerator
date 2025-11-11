@@ -1,14 +1,20 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { mockApi } from '@/lib/mock-api';
-import { 
-  Users, 
-  TrendingUp, 
-  DollarSign, 
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { mockApi } from "@/lib/mock-api";
+import {
+  Users,
+  TrendingUp,
+  DollarSign,
   Activity,
   UserPlus,
   AlertTriangle,
@@ -17,9 +23,9 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   MoreHorizontal,
-  Shield
-} from 'lucide-react';
-import Link from 'next/link';
+  Shield,
+} from "lucide-react";
+import Link from "next/link";
 
 interface AdminData {
   userMetrics: {
@@ -57,7 +63,7 @@ const AdminDashboard: React.FC = () => {
         const adminData = await mockApi.getAdminDashboard();
         setData(adminData);
       } catch (error) {
-        console.error('Failed to fetch admin data:', error);
+        console.error("Failed to fetch admin data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -85,49 +91,52 @@ const AdminDashboard: React.FC = () => {
 
   const metricCards = [
     {
-      title: 'Total Users',
+      title: "Total Users",
       value: data.userMetrics.totalUsers.toLocaleString(),
       icon: Users,
       description: `+${data.userMetrics.newSignups} new this week`,
-      trend: 'up',
-      color: 'text-blue-600',
+      trend: "up",
+      color: "text-blue-600",
     },
     {
-      title: 'Monthly Revenue',
+      title: "Monthly Revenue",
       value: `₹${(data.revenue.mrr / 1000).toFixed(0)}K`,
       icon: DollarSign,
       description: `+${data.revenue.growth}% from last month`,
-      trend: 'up',
-      color: 'text-green-600',
+      trend: "up",
+      color: "text-green-600",
     },
     {
-      title: 'Active Users',
+      title: "Active Users",
       value: data.userMetrics.activeUsers.toLocaleString(),
       icon: Activity,
-      description: `${((data.userMetrics.activeUsers / data.userMetrics.totalUsers) * 100).toFixed(1)}% of total`,
-      trend: 'up',
-      color: 'text-purple-600',
+      description: `${(
+        (data.userMetrics.activeUsers / data.userMetrics.totalUsers) *
+        100
+      ).toFixed(1)}% of total`,
+      trend: "up",
+      color: "text-purple-600",
     },
     {
-      title: 'System Uptime',
+      title: "System Uptime",
       value: `${data.systemHealth.uptime}%`,
       icon: CheckCircle,
       description: `${data.systemHealth.apiLatency}ms avg latency`,
-      trend: 'neutral',
-      color: 'text-green-600',
+      trend: "neutral",
+      color: "text-green-600",
     },
   ];
 
   const getPlanColor = (plan: string) => {
     switch (plan) {
-      case 'pro':
-        return 'bg-purple-100 text-purple-800 border-purple-200';
-      case 'growth':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'free':
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+      case "pro":
+        return "bg-purple-100 text-purple-800 border-purple-200";
+      case "growth":
+        return "bg-blue-100 text-blue-800 border-blue-200";
+      case "free":
+        return "bg-gray-100 text-gray-800 border-gray-200";
       default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return "bg-gray-100 text-gray-800 border-gray-200";
     }
   };
 
@@ -135,7 +144,7 @@ const AdminDashboard: React.FC = () => {
     <div className="space-y-8 relative">
       {/* Animated Background */}
       <div className="fixed inset-0 bg-gradient-mesh opacity-10 pointer-events-none"></div>
-      
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 animate-slide-up">
         <div>
@@ -143,12 +152,17 @@ const AdminDashboard: React.FC = () => {
             <Shield className="w-4 h-4 mr-2" />
             Admin Panel
           </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold text-gradient mb-3">Admin Dashboard</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-gradient mb-3">
+            Admin Dashboard
+          </h1>
           <p className="text-xl text-muted-foreground">
             Monitor system performance and user metrics
           </p>
         </div>
-        <div className="flex items-center space-x-2 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <div
+          className="flex items-center space-x-2 animate-slide-up"
+          style={{ animationDelay: "0.2s" }}
+        >
           <Badge className="card-glass px-4 py-2 text-green-400 border-0">
             <CheckCircle className="mr-2 h-4 w-4" />
             All Systems Operational
@@ -159,7 +173,11 @@ const AdminDashboard: React.FC = () => {
       {/* Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {metricCards.map((metric, index) => (
-          <Card key={index} className="card-glass border-0 group hover:scale-105 transition-all duration-500 animate-bounce-in" style={{ animationDelay: `${index * 0.1}s` }}>
+          <Card
+            key={index}
+            className="card-glass border-0 group hover:scale-105 transition-all duration-500 animate-bounce-in"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 group-hover:from-primary/10 group-hover:to-secondary/10 transition-all rounded-2xl"></div>
             <CardContent className="p-8 relative">
               <div className="flex items-center justify-between mb-4">
@@ -167,9 +185,13 @@ const AdminDashboard: React.FC = () => {
                   <metric.icon className="w-8 h-8 text-white" />
                 </div>
                 <Badge className="card-glass px-3 py-1 text-xs border-0 text-green-400">
-                  {metric.trend === 'up' && <ArrowUpRight className="h-3 w-3 mr-1" />}
-                  {metric.trend === 'down' && <ArrowDownRight className="h-3 w-3 mr-1" />}
-                  {metric.description.split(' ')[0]}
+                  {metric.trend === "up" && (
+                    <ArrowUpRight className="h-3 w-3 mr-1" />
+                  )}
+                  {metric.trend === "down" && (
+                    <ArrowDownRight className="h-3 w-3 mr-1" />
+                  )}
+                  {metric.description.split(" ")[0]}
                 </Badge>
               </div>
               <div>
@@ -198,7 +220,9 @@ const AdminDashboard: React.FC = () => {
                 <TrendingUp className="w-6 h-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-xl text-gradient">Revenue Overview</CardTitle>
+                <CardTitle className="text-xl text-gradient">
+                  Revenue Overview
+                </CardTitle>
                 <CardDescription className="text-muted-foreground">
                   Monthly recurring revenue and growth trends
                 </CardDescription>
@@ -209,15 +233,19 @@ const AdminDashboard: React.FC = () => {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-2xl font-bold">₹{data.revenue.totalRevenue.toLocaleString()}</p>
+                  <p className="text-2xl font-bold">
+                    ₹{data.revenue.totalRevenue.toLocaleString()}
+                  </p>
                   <p className="text-sm text-muted-foreground">Total Revenue</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-green-600">+{data.revenue.growth}%</p>
+                  <p className="text-2xl font-bold text-green-600">
+                    +{data.revenue.growth}%
+                  </p>
                   <p className="text-sm text-muted-foreground">Growth Rate</p>
                 </div>
               </div>
-              
+
               {/* Simple revenue visualization */}
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
@@ -225,9 +253,9 @@ const AdminDashboard: React.FC = () => {
                   <span>₹{data.revenue.mrr.toLocaleString()}</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div 
+                  <div
                     className="bg-gradient-primary h-2 rounded-full transition-all duration-500"
-                    style={{ width: '75%' }}
+                    style={{ width: "75%" }}
                   />
                 </div>
               </div>
@@ -259,7 +287,9 @@ const AdminDashboard: React.FC = () => {
                 <Activity className="w-6 h-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-xl text-gradient">System Health</CardTitle>
+                <CardTitle className="text-xl text-gradient">
+                  System Health
+                </CardTitle>
                 <CardDescription className="text-muted-foreground">
                   Real-time system performance metrics
                 </CardDescription>
@@ -272,18 +302,22 @@ const AdminDashboard: React.FC = () => {
                 <span className="text-sm font-medium">Uptime</span>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm font-semibold">{data.systemHealth.uptime}%</span>
+                  <span className="text-sm font-semibold">
+                    {data.systemHealth.uptime}%
+                  </span>
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium">API Latency</span>
                 <div className="flex items-center space-x-2">
                   <Clock className="h-4 w-4 text-blue-500" />
-                  <span className="text-sm font-semibold">{data.systemHealth.apiLatency}ms</span>
+                  <span className="text-sm font-semibold">
+                    {data.systemHealth.apiLatency}ms
+                  </span>
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium">Error Rate</span>
                 <div className="flex items-center space-x-2">
@@ -292,18 +326,28 @@ const AdminDashboard: React.FC = () => {
                   ) : (
                     <AlertTriangle className="h-4 w-4 text-yellow-500" />
                   )}
-                  <span className="text-sm font-semibold">{data.systemHealth.errorRate}%</span>
+                  <span className="text-sm font-semibold">
+                    {data.systemHealth.errorRate}%
+                  </span>
                 </div>
               </div>
 
               <div className="pt-4 space-y-2">
                 <h4 className="text-sm font-medium">Quick Actions</h4>
                 <div className="space-y-2">
-                  <Button variant="outline" size="sm" className="w-full justify-start">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full justify-start"
+                  >
                     <Activity className="mr-2 h-4 w-4" />
                     View Logs
                   </Button>
-                  <Button variant="outline" size="sm" className="w-full justify-start">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full justify-start"
+                  >
                     <AlertTriangle className="mr-2 h-4 w-4" />
                     Check Alerts
                   </Button>
@@ -324,7 +368,9 @@ const AdminDashboard: React.FC = () => {
                 <Users className="w-6 h-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-xl text-gradient">Recent Users</CardTitle>
+                <CardTitle className="text-xl text-gradient">
+                  Recent Users
+                </CardTitle>
                 <CardDescription className="text-muted-foreground">
                   Latest user registrations and activity
                 </CardDescription>
@@ -341,20 +387,23 @@ const AdminDashboard: React.FC = () => {
         <CardContent>
           <div className="space-y-4">
             {data.recentUsers.map((user) => (
-              <div key={user.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+              <div
+                key={user.id}
+                className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
+              >
                 <div className="flex items-center space-x-4">
                   <div className="h-10 w-10 rounded-full bg-gradient-primary flex items-center justify-center text-white font-semibold">
                     {user.name.charAt(0)}
                   </div>
                   <div>
                     <p className="font-medium">{user.name}</p>
-                    <p className="text-sm text-muted-foreground">{user.email}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {user.email}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
-                  <Badge className={getPlanColor(user.plan)}>
-                    {user.plan}
-                  </Badge>
+                  <Badge className={getPlanColor(user.plan)}>{user.plan}</Badge>
                   <div className="text-right">
                     <p className="text-sm font-medium">
                       {new Date(user.joinedAt).toLocaleDateString()}
@@ -452,7 +501,9 @@ const AdminDashboard: React.FC = () => {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 p-2 shadow-glow">
               <AlertTriangle className="h-6 w-6 text-white" />
             </div>
-            <CardTitle className="text-xl text-gradient">System Alerts</CardTitle>
+            <CardTitle className="text-xl text-gradient">
+              System Alerts
+            </CardTitle>
           </div>
         </CardHeader>
         <CardContent className="relative">
@@ -461,21 +512,29 @@ const AdminDashboard: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <div className="h-3 w-3 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-pulse" />
                 <div>
-                  <p className="text-sm font-medium text-gradient">High API usage detected</p>
-                  <p className="text-xs text-muted-foreground">Reddit API calls approaching limit</p>
+                  <p className="text-sm font-medium text-gradient">
+                    High API usage detected
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Reddit API calls approaching limit
+                  </p>
                 </div>
               </div>
               <Button className="btn-secondary group-hover:scale-105 transition-transform">
                 Review
               </Button>
             </div>
-            
+
             <div className="card-glass p-4 border-0 flex items-center justify-between group hover:scale-[1.02] transition-all">
               <div className="flex items-center space-x-4">
                 <div className="h-3 w-3 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full animate-pulse" />
                 <div>
-                  <p className="text-sm font-medium text-gradient">New feature requests</p>
-                  <p className="text-xs text-muted-foreground">5 users requested Instagram integration</p>
+                  <p className="text-sm font-medium text-gradient">
+                    New feature requests
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    5 users requested Instagram integration
+                  </p>
                 </div>
               </div>
               <Button className="btn-secondary group-hover:scale-105 transition-transform">

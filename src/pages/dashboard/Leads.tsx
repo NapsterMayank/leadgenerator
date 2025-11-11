@@ -1,39 +1,58 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { mockApi, Lead } from '@/lib/mock-api';
-import { 
-  Search, 
-  Filter, 
-  ExternalLink, 
-  MessageSquare, 
-  Eye, 
-  Archive, 
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { mockApi, Lead } from "@/lib/mock-api";
+import {
+  Search,
+  Filter,
+  ExternalLink,
+  MessageSquare,
+  Eye,
+  Archive,
   Sparkles,
   Clock,
   TrendingUp,
   User,
   Calendar,
-  Globe
-} from 'lucide-react';
+  Globe,
+} from "lucide-react";
 
 const Leads: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState<string>('all');
-  const [platformFilter, setPlatformFilter] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [platformFilter, setPlatformFilter] = useState<string>("all");
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [isGeneratingReply, setIsGeneratingReply] = useState(false);
-  const [generatedReply, setGeneratedReply] = useState('');
-  const [customReply, setCustomReply] = useState('');
+  const [generatedReply, setGeneratedReply] = useState("");
+  const [customReply, setCustomReply] = useState("");
 
   useEffect(() => {
     const fetchLeads = async () => {
@@ -41,7 +60,7 @@ const Leads: React.FC = () => {
         const data = await mockApi.getLeads();
         setLeads(data);
       } catch (error) {
-        console.error('Failed to fetch leads:', error);
+        console.error("Failed to fetch leads:", error);
       } finally {
         setIsLoading(false);
       }
@@ -57,7 +76,7 @@ const Leads: React.FC = () => {
       setGeneratedReply(reply);
       setCustomReply(reply);
     } catch (error) {
-      console.error('Failed to generate reply:', error);
+      console.error("Failed to generate reply:", error);
     } finally {
       setIsGeneratingReply(false);
     }
@@ -74,51 +93,54 @@ const Leads: React.FC = () => {
 5. Platform: ${lead.platform} - good for organic engagement`);
   };
 
-  const filteredLeads = leads.filter(lead => {
-    const matchesSearch = lead.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         lead.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         lead.author.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesStatus = statusFilter === 'all' || lead.status === statusFilter;
-    const matchesPlatform = platformFilter === 'all' || lead.platform === platformFilter;
-    
+  const filteredLeads = leads.filter((lead) => {
+    const matchesSearch =
+      lead.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      lead.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      lead.author.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesStatus =
+      statusFilter === "all" || lead.status === statusFilter;
+    const matchesPlatform =
+      platformFilter === "all" || lead.platform === platformFilter;
+
     return matchesSearch && matchesStatus && matchesPlatform;
   });
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'unread':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'reviewed':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'replied':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'archived':
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+      case "unread":
+        return "bg-blue-100 text-blue-800 border-blue-200";
+      case "reviewed":
+        return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      case "replied":
+        return "bg-green-100 text-green-800 border-green-200";
+      case "archived":
+        return "bg-gray-100 text-gray-800 border-gray-200";
       default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return "bg-gray-100 text-gray-800 border-gray-200";
     }
   };
 
   const getPlatformIcon = (platform: string) => {
     switch (platform) {
-      case 'reddit':
-        return '🔴';
-      case 'quora':
-        return '🔵';
-      case 'telegram':
-        return '✈️';
-      case 'x':
-        return '❌';
+      case "reddit":
+        return "🔴";
+      case "quora":
+        return "🔵";
+      case "telegram":
+        return "✈️";
+      case "x":
+        return "❌";
       default:
-        return '🌐';
+        return "🌐";
     }
   };
 
   const getConfidenceColor = (score: number) => {
-    if (score >= 90) return 'text-green-600';
-    if (score >= 70) return 'text-yellow-600';
-    return 'text-red-600';
+    if (score >= 90) return "text-green-600";
+    if (score >= 70) return "text-yellow-600";
+    return "text-red-600";
   };
 
   if (isLoading) {
@@ -146,7 +168,7 @@ const Leads: React.FC = () => {
         </div>
         <div className="flex items-center space-x-2">
           <Badge variant="outline" className="text-sm">
-            {filteredLeads.filter(l => l.status === 'unread').length} unread
+            {filteredLeads.filter((l) => l.status === "unread").length} unread
           </Badge>
           <Badge variant="outline" className="text-sm">
             {filteredLeads.length} total
@@ -165,7 +187,7 @@ const Leads: React.FC = () => {
             className="pl-10"
           />
         </div>
-        
+
         <Select value={statusFilter} onValueChange={setStatusFilter}>
           <SelectTrigger className="w-[150px]">
             <SelectValue placeholder="Status" />
@@ -200,22 +222,29 @@ const Leads: React.FC = () => {
             <Search className="h-12 w-12 text-muted-foreground mb-4" />
             <h3 className="text-lg font-semibold mb-2">No leads found</h3>
             <p className="text-muted-foreground text-center">
-              {searchTerm || statusFilter !== 'all' || platformFilter !== 'all' 
-                ? 'Try adjusting your filters' 
-                : 'Your AI is scanning for leads. Check back soon!'}
+              {searchTerm || statusFilter !== "all" || platformFilter !== "all"
+                ? "Try adjusting your filters"
+                : "Your AI is scanning for leads. Check back soon!"}
             </p>
           </CardContent>
         </Card>
       ) : (
         <div className="space-y-4">
           {filteredLeads.map((lead) => (
-            <Card key={lead.id} className="card-elegant hover:shadow-glow transition-all duration-300">
+            <Card
+              key={lead.id}
+              className="card-elegant hover:shadow-glow transition-all duration-300"
+            >
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex-1 space-y-2">
                     <div className="flex items-center space-x-2">
-                      <span className="text-lg">{getPlatformIcon(lead.platform)}</span>
-                      <CardTitle className="text-lg line-clamp-2">{lead.title}</CardTitle>
+                      <span className="text-lg">
+                        {getPlatformIcon(lead.platform)}
+                      </span>
+                      <CardTitle className="text-lg line-clamp-2">
+                        {lead.title}
+                      </CardTitle>
                     </div>
                     <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                       <div className="flex items-center space-x-1">
@@ -228,7 +257,9 @@ const Leads: React.FC = () => {
                       </div>
                       <div className="flex items-center space-x-1">
                         <Clock className="h-4 w-4" />
-                        <span>{new Date(lead.createdAt).toLocaleDateString()}</span>
+                        <span>
+                          {new Date(lead.createdAt).toLocaleDateString()}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -236,7 +267,10 @@ const Leads: React.FC = () => {
                     <Badge className={getStatusColor(lead.status)}>
                       {lead.status}
                     </Badge>
-                    <Badge variant="outline" className={getConfidenceColor(lead.confidenceScore)}>
+                    <Badge
+                      variant="outline"
+                      className={getConfidenceColor(lead.confidenceScore)}
+                    >
                       {lead.confidenceScore}% match
                     </Badge>
                   </div>
@@ -251,26 +285,30 @@ const Leads: React.FC = () => {
                   <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary">
                     <div className="flex items-center space-x-2 mb-2">
                       <Sparkles className="h-4 w-4 text-primary" />
-                      <span className="text-sm font-medium">AI Generated Reply</span>
+                      <span className="text-sm font-medium">
+                        AI Generated Reply
+                      </span>
                     </div>
-                    <p className="text-sm text-muted-foreground">{lead.aiReply}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {lead.aiReply}
+                    </p>
                   </div>
                 )}
 
                 <div className="flex flex-wrap gap-2">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="sm"
                     onClick={() => handleExplainRelevance(lead)}
                   >
                     <Eye className="mr-2 h-4 w-4" />
                     Explain Relevance
                   </Button>
-                  
+
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         size="sm"
                         onClick={() => setSelectedLead(lead)}
                       >
@@ -285,11 +323,13 @@ const Leads: React.FC = () => {
                           Create a personalized response for this lead
                         </DialogDescription>
                       </DialogHeader>
-                      
+
                       {selectedLead && (
                         <div className="space-y-4">
                           <div className="p-4 bg-muted/50 rounded-lg">
-                            <h4 className="font-medium mb-2">{selectedLead.title}</h4>
+                            <h4 className="font-medium mb-2">
+                              {selectedLead.title}
+                            </h4>
                             <p className="text-sm text-muted-foreground line-clamp-3">
                               {selectedLead.content}
                             </p>
@@ -297,15 +337,21 @@ const Leads: React.FC = () => {
 
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
-                              <label className="text-sm font-medium">AI Generated Reply</label>
-                              <Button 
-                                variant="outline" 
+                              <label className="text-sm font-medium">
+                                AI Generated Reply
+                              </label>
+                              <Button
+                                variant="outline"
                                 size="sm"
-                                onClick={() => handleGenerateReply(selectedLead.id)}
+                                onClick={() =>
+                                  handleGenerateReply(selectedLead.id)
+                                }
                                 disabled={isGeneratingReply}
                               >
                                 <Sparkles className="mr-2 h-4 w-4" />
-                                {isGeneratingReply ? 'Generating...' : 'Regenerate'}
+                                {isGeneratingReply
+                                  ? "Generating..."
+                                  : "Regenerate"}
                               </Button>
                             </div>
                             <Textarea
@@ -318,15 +364,17 @@ const Leads: React.FC = () => {
 
                           <div className="flex justify-between">
                             <Button variant="outline" asChild>
-                              <a href={selectedLead.url} target="_blank" rel="noopener noreferrer">
+                              <a
+                                href={selectedLead.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
                                 <ExternalLink className="mr-2 h-4 w-4" />
                                 View Original Post
                               </a>
                             </Button>
                             <div className="space-x-2">
-                              <Button variant="outline">
-                                Save to Queue
-                              </Button>
+                              <Button variant="outline">Save to Queue</Button>
                               <Button className="btn-primary">
                                 Post Reply
                               </Button>
@@ -338,7 +386,11 @@ const Leads: React.FC = () => {
                   </Dialog>
 
                   <Button variant="outline" size="sm" asChild>
-                    <a href={lead.url} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={lead.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <ExternalLink className="mr-2 h-4 w-4" />
                       View Post
                     </a>
@@ -358,9 +410,7 @@ const Leads: React.FC = () => {
       {/* Load More */}
       {filteredLeads.length > 0 && (
         <div className="text-center">
-          <Button variant="outline">
-            Load More Leads
-          </Button>
+          <Button variant="outline">Load More Leads</Button>
         </div>
       )}
     </div>

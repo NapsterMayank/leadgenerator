@@ -1,22 +1,28 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { mockApi } from '@/lib/mock-api';
-import { 
-  Search, 
-  MessageSquare, 
-  CreditCard, 
+import React, { useEffect, useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { mockApi } from "@/lib/mock-api";
+import {
+  Search,
+  MessageSquare,
+  CreditCard,
   Target,
   TrendingUp,
   Clock,
   Activity,
   Plus,
-  ArrowRight
-} from 'lucide-react';
-import Link from 'next/link';
+  ArrowRight,
+} from "lucide-react";
+import Link from "next/link";
 
 interface OverviewData {
   dailyMetrics: {
@@ -48,7 +54,7 @@ const Overview: React.FC = () => {
         const overviewData = await mockApi.getOverview();
         setData(overviewData);
       } catch (error) {
-        console.error('Failed to fetch overview data:', error);
+        console.error("Failed to fetch overview data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -76,42 +82,42 @@ const Overview: React.FC = () => {
 
   const metricCards = [
     {
-      title: 'Leads Found Today',
+      title: "Leads Found Today",
       value: data.dailyMetrics.leadsFound,
       icon: Search,
-      description: '+23% from yesterday',
-      trend: 'up',
+      description: "+23% from yesterday",
+      trend: "up",
     },
     {
-      title: 'Replies Generated',
+      title: "Replies Generated",
       value: data.dailyMetrics.repliesGenerated,
       icon: MessageSquare,
-      description: '+12% from yesterday',
-      trend: 'up',
+      description: "+12% from yesterday",
+      trend: "up",
     },
     {
-      title: 'Credits Used',
+      title: "Credits Used",
       value: data.dailyMetrics.creditsUsed,
       icon: CreditCard,
-      description: '425 remaining',
-      trend: 'neutral',
+      description: "425 remaining",
+      trend: "neutral",
     },
     {
-      title: 'Active Campaigns',
+      title: "Active Campaigns",
       value: data.dailyMetrics.campaignsActive,
       icon: Target,
-      description: 'All running smoothly',
-      trend: 'neutral',
+      description: "All running smoothly",
+      trend: "neutral",
     },
   ];
 
   const getActivityIcon = (type: string) => {
     switch (type) {
-      case 'lead_found':
+      case "lead_found":
         return <Search className="h-4 w-4 text-blue-500" />;
-      case 'reply_generated':
+      case "reply_generated":
         return <MessageSquare className="h-4 w-4 text-green-500" />;
-      case 'campaign_created':
+      case "campaign_created":
         return <Target className="h-4 w-4 text-purple-500" />;
       default:
         return <Activity className="h-4 w-4 text-muted-foreground" />;
@@ -123,7 +129,9 @@ const Overview: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard Overview</h1>
+          <h1 className="text-3xl font-bold tracking-tight">
+            Dashboard Overview
+          </h1>
           <p className="text-muted-foreground">
             Welcome back! Here's what's happening with your lead generation.
           </p>
@@ -139,7 +147,10 @@ const Overview: React.FC = () => {
       {/* Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {metricCards.map((metric, index) => (
-          <Card key={index} className="card-elegant hover:shadow-glow transition-all duration-300">
+          <Card
+            key={index}
+            className="card-elegant hover:shadow-glow transition-all duration-300"
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
                 {metric.title}
@@ -149,7 +160,7 @@ const Overview: React.FC = () => {
             <CardContent>
               <div className="text-2xl font-bold">{metric.value}</div>
               <div className="flex items-center text-xs text-muted-foreground mt-1">
-                {metric.trend === 'up' && (
+                {metric.trend === "up" && (
                   <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
                 )}
                 {metric.description}
@@ -186,11 +197,11 @@ const Overview: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex space-x-1">
-                    <div 
+                    <div
                       className="h-2 bg-primary rounded-full"
                       style={{ width: `${(stat.leads / 20) * 100}px` }}
                     />
-                    <div 
+                    <div
                       className="h-2 bg-secondary rounded-full"
                       style={{ width: `${(stat.replies / 10) * 100}px` }}
                     />
@@ -213,9 +224,7 @@ const Overview: React.FC = () => {
             <div className="space-y-4">
               {data.recentActivity.map((activity) => (
                 <div key={activity.id} className="flex items-start space-x-3">
-                  <div className="mt-1">
-                    {getActivityIcon(activity.type)}
-                  </div>
+                  <div className="mt-1">{getActivityIcon(activity.type)}</div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-foreground">
                       {activity.message}
@@ -290,25 +299,29 @@ const Overview: React.FC = () => {
             <div className="space-y-2">
               <h4 className="font-medium">Optimize Your Keywords</h4>
               <p className="text-sm text-muted-foreground">
-                Use specific, long-tail keywords that your target audience actually uses in conversations.
+                Use specific, long-tail keywords that your target audience
+                actually uses in conversations.
               </p>
             </div>
             <div className="space-y-2">
               <h4 className="font-medium">Use Hinglish Templates</h4>
               <p className="text-sm text-muted-foreground">
-                Our Hinglish templates have 40% higher engagement rates with Indian audiences.
+                Our Hinglish templates have 40% higher engagement rates with
+                Indian audiences.
               </p>
             </div>
             <div className="space-y-2">
               <h4 className="font-medium">Enable Safe Mode</h4>
               <p className="text-sm text-muted-foreground">
-                Always review AI-generated replies before posting to maintain authenticity.
+                Always review AI-generated replies before posting to maintain
+                authenticity.
               </p>
             </div>
             <div className="space-y-2">
               <h4 className="font-medium">Monitor Multiple Platforms</h4>
               <p className="text-sm text-muted-foreground">
-                Reddit and Quora together generate 70% more qualified leads than single platforms.
+                Reddit and Quora together generate 70% more qualified leads than
+                single platforms.
               </p>
             </div>
           </div>

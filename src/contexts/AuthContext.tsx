@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { mockApi, User } from '@/lib/mock-api';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { mockApi, User } from "@/lib/mock-api";
 
 interface AuthContextType {
   user: User | null;
@@ -16,26 +16,28 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Check for stored auth token
-    const token = localStorage.getItem('auth-token');
-    const userData = localStorage.getItem('user-data');
-    
+    const token = localStorage.getItem("auth-token");
+    const userData = localStorage.getItem("user-data");
+
     if (token && userData) {
       try {
         setUser(JSON.parse(userData));
       } catch (error) {
-        localStorage.removeItem('auth-token');
-        localStorage.removeItem('user-data');
+        localStorage.removeItem("auth-token");
+        localStorage.removeItem("user-data");
       }
     }
     setIsLoading(false);
@@ -46,8 +48,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const response = await mockApi.login(email, password);
       setUser(response.user);
-      localStorage.setItem('auth-token', response.token);
-      localStorage.setItem('user-data', JSON.stringify(response.user));
+      localStorage.setItem("auth-token", response.token);
+      localStorage.setItem("user-data", JSON.stringify(response.user));
     } finally {
       setIsLoading(false);
     }
@@ -58,8 +60,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const response = await mockApi.signup(email, password, name);
       setUser(response.user);
-      localStorage.setItem('auth-token', response.token);
-      localStorage.setItem('user-data', JSON.stringify(response.user));
+      localStorage.setItem("auth-token", response.token);
+      localStorage.setItem("user-data", JSON.stringify(response.user));
     } finally {
       setIsLoading(false);
     }
@@ -67,8 +69,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('auth-token');
-    localStorage.removeItem('user-data');
+    localStorage.removeItem("auth-token");
+    localStorage.removeItem("user-data");
   };
 
   const value = {
