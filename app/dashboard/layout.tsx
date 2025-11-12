@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useAuth } from '@/contexts/AuthContext';
-import { redirect } from 'next/navigation';
-import DashboardLayout from '@/components/layout/DashboardLayout';
+import { useAuth } from "@/contexts/AuthContext";
+import { redirect } from "next/navigation";
+import DashboardLayout from "@/components/layout/DashboardLayout";
 
 export default function DashboardRoot({
   children,
@@ -20,7 +20,7 @@ export default function DashboardRoot({
   }
 
   if (!user) {
-    redirect('/auth/login');
+    redirect("/auth/login");
   }
 
   return <DashboardLayout>{children}</DashboardLayout>;

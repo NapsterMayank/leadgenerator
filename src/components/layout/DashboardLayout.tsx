@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Header from './Header';
-import Sidebar from './Sidebar';
+import React from "react";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -17,9 +17,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           <Sidebar />
         </aside>
         <main className="flex-1 lg:ml-64">
-          <div className="container py-6">
-            {children}
-          </div>
+          <div className="container py-6">{children}</div>
         </main>
       </div>
     </div>

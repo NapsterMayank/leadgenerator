@@ -1,632 +1,459 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { 
-  ArrowRight, 
-  Check, 
-  Star, 
-  Users, 
-  MessageSquare, 
-  Target, 
+import {
+  ArrowRight,
+  Check,
+  Compass,
+  LineChart,
+  MessageSquare,
+  Radar,
+  ShieldCheck,
   Sparkles,
+  Users,
   Zap,
-  Brain,
-  Globe,
-  Shield,
-  BarChart3,
-  Clock,
-  Smartphone,
-  TrendingUp,
-  Award,
-  Play,
-  MessageCircle
-} from 'lucide-react';
+} from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+const metrics = [
+  {
+    label: "Signals scanned / day",
+    value: "48K",
+    detail: "across Reddit, Telegram, X, Quora",
+  },
+  {
+    label: "Warm replies",
+    value: "6.4x",
+    detail: "higher than cold outreach averages",
+  },
+  {
+    label: "Live conversations",
+    value: "240+",
+    detail: "handled every single hour",
+  },
+];
+
+const features = [
+  {
+    title: "Intent radar",
+    description: "Understands tone, urgency, and buying signals automatically.",
+    icon: Radar,
+    items: ["Hinglish-native", "Industry presets", "Noise filtering"],
+  },
+  {
+    title: "Reply studio",
+    description: "Drafts human responses that feel on-brand before you approve.",
+    icon: MessageSquare,
+    items: ["Context memory", "Safeguarded templates", "Playbooks"],
+  },
+  {
+    title: "Team alignment",
+    description: "Pushes qualified threads directly into your CRM and Slack.",
+    icon: Users,
+    items: ["HubSpot + Zapier", "Owner routing", "Activity notes"],
+  },
+];
+
+const automations = [
+  {
+    title: "Watch the web",
+    description:
+      "Always-on monitoring for long-tail keywords, vernacular questions, and competitor mentions.",
+    icon: Compass,
+    highlight: "Regional filters & custom dictionaries",
+  },
+  {
+    title: "Score the opportunity",
+    description:
+      "AI grades sentiment, urgency, and fit so you only see threads that deserve a human follow-up.",
+    icon: LineChart,
+    highlight: "Transparent scoring with explainer notes",
+  },
+  {
+    title: "Reply with tact",
+    description:
+      "Suggested responses reference the thread, your product truth, and Indian conversational cues.",
+    icon: Sparkles,
+    highlight: "Review + approve in one tap",
+  },
+  {
+    title: "Hand-off securely",
+    description:
+      "Sync enriched leads into your pipeline with compliance logs for every touch.",
+    icon: ShieldCheck,
+    highlight: "SOC2-ready audit trails",
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      "We stopped doom scrolling forums every night. DesiLeads surfaces the 12 conversations that matter and drafts charming Hinglish replies that our brand team approves.",
+    name: "Pooja Kapoor",
+    role: "Growth lead, Fintech Collective",
+    metric: "+38% trial-to-paid",
+  },
+  {
+    quote:
+      "The new workspace feels calm and editorial. My team can see channels, intent score, and next steps at a glance without neon gradients screaming at us.",
+    name: "Arjun Rao",
+    role: "VP Sales, SaaS Foundry",
+    metric: "12 hrs saved weekly",
+  },
+];
+
+const plans = [
+  {
+    name: "Build",
+    price: "Free 14-day trial",
+    description: "Perfect for founders validating the channel mix.",
+    perks: [
+      "Up to 3 audiences & 200 conversations",
+      "Manual approval on every reply",
+      "Slack + email digests",
+    ],
+  },
+  {
+    name: "Scale",
+    price: "From ₹24,000 / month",
+    description: "For GTM teams that need consistent demand inflow.",
+    perks: [
+      "Unlimited audiences & automations",
+      "CRM + webhook delivery",
+      "Shared inbox with roles & guardrails",
+    ],
+    featured: true,
+  },
+];
+
+const signals = [
+  "Founder & operator subreddits",
+  "Niche Telegram & WhatsApp groups",
+  "Quora threads in English + Hinglish",
+  "Long-tail posts on X, Product Hunt, Indie Hackers",
+];
 
 const Landing = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="fixed inset-0 bg-gradient-mesh opacity-30"></div>
-      <div className="fixed inset-0 bg-background/80 backdrop-blur-3xl"></div>
-      
-      {/* Hero Section */}
-      <section className="relative py-32 px-4 text-center overflow-hidden">
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl animate-float"></div>
-        <div className="absolute top-40 right-20 w-32 h-32 bg-secondary/20 rounded-full blur-xl animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-20 left-1/4 w-16 h-16 bg-accent/20 rounded-full blur-xl animate-float" style={{ animationDelay: '4s' }}></div>
-        
-        <div className="relative max-w-7xl mx-auto">
-          <Badge className="mb-8 card-glass px-6 py-2 text-sm font-medium animate-bounce-in border-0">
-            <Sparkles className="w-4 h-4 mr-2" />
-            India's #1 AI Lead Generation Platform
+    <div className="relative isolate overflow-hidden bg-background text-foreground">
+      <div
+        className="absolute inset-x-0 top-0 h-[520px] bg-gradient-to-b from-primary/15 via-background/60 to-background"
+        aria-hidden
+      />
+
+      {/* Hero */}
+      <section className="container relative grid gap-12 px-4 py-24 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="space-y-8">
+          <Badge className="w-fit rounded-full bg-muted/60 px-4 py-1 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+            Real conversations, not cold blasts
           </Badge>
-          
-          <h1 className="text-6xl md:text-8xl font-bold mb-8 text-gradient leading-tight animate-slide-up">
-            Get customers from<br />
-            <span className="text-glow">Reddit, Quora, Telegram & X</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            Automated, safe, India-first AI-powered lead generation with <span className="text-gradient font-semibold">Hinglish responses</span> that convert like magic
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-            <Button size="lg" className="btn-primary text-lg px-10 py-6 rounded-2xl group">
-              <Target className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-              Start Free Trial
-            </Button>
-            <Button size="lg" className="btn-secondary text-lg px-10 py-6 rounded-2xl group">
-              <Brain className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-              See AI Demo
-            </Button>
-          </div>
-          
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {[
-              { number: "10K+", label: "Leads Generated", delay: "0s" },
-              { number: "500+", label: "Happy Customers", delay: "0.1s" },
-              { number: "95%", label: "Success Rate", delay: "0.2s" },
-              { number: "24/7", label: "AI Monitoring", delay: "0.3s" }
-            ].map((stat, index) => (
-              <div key={index} className="card-glass p-6 text-center animate-bounce-in" style={{ animationDelay: stat.delay }}>
-                <div className="text-4xl font-bold text-gradient mb-2">{stat.number}</div>
-                <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      {/* Features Section */}
-      <section className="relative py-32 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <Badge className="card-glass px-4 py-2 mb-6 border-0">
-              <Sparkles className="w-4 h-4 mr-2" />
-              Powerful Features
-            </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gradient">
-              Why DesiLeads Works Better
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Built specifically for Indian markets with AI that understands local context, culture, and conversation patterns
+          <div className="space-y-6">
+            <h1 className="text-4xl font-semibold leading-tight text-balance sm:text-5xl lg:text-6xl">
+              A calmer lead engine for modern Indian SaaS teams
+            </h1>
+            <p className="text-lg text-muted-foreground sm:text-xl">
+              DesiLeads watches emerging communities, scores buying intent, and
+              drafts Hinglish-friendly replies so you show up like a local—not a
+              bot.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Zap,
-                title: "AI Lead Scanning",
-                description: "Advanced AI monitors Reddit, Quora, Telegram & X for relevant conversations in real-time",
-                gradient: "from-primary to-primary-light"
-              },
-              {
-                icon: MessageSquare,
-                title: "Viral Template Library",
-                description: "Pre-tested Hinglish templates that get engagement and drive conversions naturally",
-                gradient: "from-secondary to-secondary-light"
-              },
-              {
-                icon: Shield,
-                title: "Safe Reply Generator",
-                description: "AI ensures your responses are helpful, not spammy, protecting your brand reputation",
-                gradient: "from-accent to-accent-light"
-              },
-              {
-                icon: Globe,
-                title: "Multilingual Support",
-                description: "Respond in English, Hinglish, Hindi, Tamil, and more regional languages fluently",
-                gradient: "from-primary to-secondary"
-              },
-              {
-                icon: BarChart3,
-                title: "Performance Analytics",
-                description: "Track engagement, conversion rates, and ROI across all platforms with detailed insights",
-                gradient: "from-secondary to-accent"
-              },
-              {
-                icon: Users,
-                title: "Team Collaboration",
-                description: "Work together with role-based access, approval workflows, and shared templates",
-                gradient: "from-accent to-primary"
-              }
-            ].map((feature, index) => (
-              <Card key={index} className="card-glass group hover:scale-105 transition-all duration-500 border-0 overflow-hidden">
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-5 group-hover:opacity-10 transition-opacity`}></div>
-                <CardHeader className="relative p-8">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.gradient} p-4 mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <feature.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-xl font-bold mb-3 group-hover:text-gradient transition-colors">
-                    {feature.title}
-                  </CardTitle>
-                  <CardDescription className="text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
+          <div className="flex flex-wrap gap-4">
+            <Button className="rounded-full bg-foreground px-8 py-6 text-base font-semibold text-background hover:bg-foreground/90">
+              Start the guided demo <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              className="rounded-full border-border/60 px-8 py-6 text-base font-semibold"
+            >
+              Book a working session
+            </Button>
           </div>
-        </div>
-      </section>
-      
-      {/* How It Works */}
-      <section className="relative py-32 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
-        <div className="max-w-7xl mx-auto relative">
-          <div className="text-center mb-20">
-            <Badge className="card-glass px-4 py-2 mb-6 border-0">
-              <Target className="w-4 h-4 mr-2" />
-              Simple Process
-            </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gradient">
-              How It Works
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Get started in 3 simple steps and watch the leads flow in
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-12 relative">
-            {/* Connection Lines */}
-            <div className="hidden md:block absolute top-24 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-primary via-secondary to-accent opacity-30"></div>
-            
-            {[
-              {
-                step: "1",
-                title: "Describe Your Product",
-                description: "Tell our AI about your product, target audience, and key benefits in simple, natural language",
-                icon: MessageSquare,
-                color: "from-primary to-primary-light"
-              },
-              {
-                step: "2", 
-                title: "Select Platforms & Keywords",
-                description: "Choose Reddit, Quora, Telegram, or X. Add relevant keywords, filters, and targeting preferences",
-                icon: Target,
-                color: "from-secondary to-secondary-light"
-              },
-              {
-                step: "3",
-                title: "AI Finds & Engages",
-                description: "Our AI monitors conversations 24/7 and generates contextual responses for your approval",
-                icon: Brain,
-                color: "from-accent to-accent-light"
-              }
-            ].map((step, index) => (
-              <div key={index} className="text-center group">
-                <div className="relative mb-8">
-                  <div className={`w-20 h-20 rounded-3xl bg-gradient-to-br ${step.color} flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-all duration-300 shadow-glow`}>
-                    <step.icon className="w-10 h-10 text-white" />
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-background border-2 border-primary rounded-full flex items-center justify-center text-sm font-bold text-primary">
-                    {step.step}
-                  </div>
-                </div>
-                
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-gradient transition-colors">
-                  {step.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed max-w-sm mx-auto">
-                  {step.description}
+          <div className="flex flex-wrap items-center gap-6 rounded-3xl border border-border/60 bg-card/60 p-6 shadow-glass">
+            {metrics.map((metric) => (
+              <div key={metric.label} className="min-w-[180px] space-y-1">
+                <p className="text-3xl font-semibold">{metric.value}</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  {metric.label}
+                </p>
+                <p className="text-xs text-muted-foreground/80">
+                  {metric.detail}
                 </p>
               </div>
             ))}
           </div>
         </div>
-      </section>
-      
-      {/* Pricing */}
-      <section className="relative py-32 px-4">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10"></div>
-        <div className="max-w-7xl mx-auto relative">
-          <div className="text-center mb-20">
-            <Badge className="card-glass px-4 py-2 mb-6 border-0">
-              <Star className="w-4 h-4 mr-2" />
-              Pricing Plans
+
+        <Card className="border-border/50 bg-background-secondary backdrop-blur">
+          <CardHeader className="space-y-3 border-b border-border/40">
+            <Badge className="w-fit bg-secondary/20 text-secondary-foreground">
+              Live signal board
             </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gradient">
-              Simple, Transparent Pricing
+            <CardTitle className="text-2xl">
+              Every emerging thread, ranked by intent score
+            </CardTitle>
+            <CardDescription>
+              Human-friendly views with the context your reps actually need
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6 pt-6">
+            {signals.map((signal) => (
+              <div
+                key={signal}
+                className="flex items-start justify-between rounded-2xl border border-border/40 bg-muted/30 px-4 py-3"
+              >
+                <div className="space-y-1">
+                  <p className="text-sm font-medium">{signal}</p>
+                  <p className="text-xs text-muted-foreground">
+                    Live intent, sentiment, and volume overlays
+                  </p>
+                </div>
+                <span className="text-xs font-semibold text-primary">
+                  Tracking
+                </span>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Features */}
+      <section
+        id="features"
+        className="container space-y-12 px-4 py-20 sm:py-28"
+      >
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr]">
+          <div className="space-y-4">
+            <Badge className="w-fit rounded-full bg-accent/15 text-accent-foreground">
+              Built for nuance
+            </Badge>
+            <h2 className="text-3xl font-semibold sm:text-4xl">
+              Qualify leads with editorial calm, not neon chaos
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Choose the plan that fits your business needs. All plans include our core AI features
+            <p className="text-lg text-muted-foreground">
+              Directional dashboards, tasteful typography, and layout breathing
+              room keep revenue teams focused on judgement—not jarring gradients.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Free Trial */}
-            <Card className="card-glass border-0 group hover:scale-105 transition-all duration-500">
-              <CardHeader className="p-8">
-                <CardTitle className="text-2xl font-bold mb-2">Free Trial</CardTitle>
-                <div className="text-4xl font-bold text-gradient mb-2">₹0</div>
-                <CardDescription className="text-base">Perfect for testing our platform</CardDescription>
-              </CardHeader>
-              <CardContent className="p-8 pt-0">
-                <ul className="space-y-4 mb-8">
-                  {[
-                    "50 leads per month",
-                    "1 platform connection", 
-                    "Basic templates",
-                    "Email support"
-                  ].map((feature, index) => (
-                    <li key={index} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-                        <Check className="w-3 h-3 text-primary" />
-                      </div>
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>
+          <div className="grid gap-6 md:grid-cols-3">
+            {features.map((feature) => (
+              <Card
+                key={feature.title}
+                className="border-border/40 bg-background-secondary/60"
+              >
+                <CardHeader className="space-y-3">
+                  <feature.icon className="h-10 w-10 rounded-xl bg-muted/30 p-2 text-foreground/70" />
+                  <CardTitle className="text-lg">{feature.title}</CardTitle>
+                  <CardDescription>{feature.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {feature.items.map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary/70" />
+                      {item}
+                    </div>
                   ))}
-                </ul>
-                <Button className="w-full btn-secondary group-hover:scale-105 transition-transform">
-                  Start Free Trial
-                </Button>
-              </CardContent>
-            </Card>
-            
-            {/* Growth Plan - Most Popular */}
-            <Card className="card-glass border-2 border-primary/30 group hover:scale-105 transition-all duration-500 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-primary opacity-5"></div>
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                <Badge className="bg-gradient-primary text-white px-6 py-2 rounded-full shadow-glow">
-                  <Star className="w-4 h-4 mr-1" />
-                  Most Popular
-                </Badge>
-              </div>
-              <CardHeader className="p-8 relative">
-                <CardTitle className="text-2xl font-bold mb-2">Growth</CardTitle>
-                <div className="text-4xl font-bold text-gradient mb-2">
-                  ₹799<span className="text-lg font-normal text-muted-foreground">/month</span>
-                </div>
-                <CardDescription className="text-base">For growing businesses</CardDescription>
-              </CardHeader>
-              <CardContent className="p-8 pt-0 relative">
-                <ul className="space-y-4 mb-8">
-                  {[
-                    "500 leads per month",
-                    "All platform connections",
-                    "Premium templates",
-                    "Analytics dashboard",
-                    "Priority email support"
-                  ].map((feature, index) => (
-                    <li key={index} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-                        <Check className="w-3 h-3 text-primary" />
-                      </div>
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button className="w-full btn-primary group-hover:scale-105 transition-transform">
-                  Choose Growth
-                </Button>
-              </CardContent>
-            </Card>
-            
-            {/* Pro Plan */}
-            <Card className="card-glass border-0 group hover:scale-105 transition-all duration-500">
-              <CardHeader className="p-8">
-                <CardTitle className="text-2xl font-bold mb-2">Pro</CardTitle>
-                <div className="text-4xl font-bold text-gradient mb-2">
-                  ₹2,499<span className="text-lg font-normal text-muted-foreground">/month</span>
-                </div>
-                <CardDescription className="text-base">For established companies</CardDescription>
-              </CardHeader>
-              <CardContent className="p-8 pt-0">
-                <ul className="space-y-4 mb-8">
-                  {[
-                    "Unlimited leads",
-                    "All platform connections",
-                    "Custom templates",
-                    "Advanced analytics",
-                    "Priority support",
-                    "Team collaboration"
-                  ].map((feature, index) => (
-                    <li key={index} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-                        <Check className="w-3 h-3 text-primary" />
-                      </div>
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button className="w-full btn-secondary group-hover:scale-105 transition-transform">
-                  Choose Pro
-                </Button>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* Automations */}
+      <section className="container space-y-10 px-4 py-20" id="automations">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <Badge className="w-fit rounded-full bg-primary/15 text-primary">
+              Opinionated automation
+            </Badge>
+            <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">
+              The workflow that replaces doom scrolling
+            </h2>
+          </div>
+          <p className="max-w-xl text-muted-foreground">
+            Transparent stages keep legal, brand, and sales aligned. Every step
+            is logged and reviewable before the message leaves your desk.
+          </p>
+        </div>
+        <div className="grid gap-6 lg:grid-cols-4">
+          {automations.map((automation) => (
+            <Card
+              key={automation.title}
+              className="flex flex-col border-border/40 bg-card/70"
+            >
+              <CardHeader className="space-y-3">
+                <automation.icon className="h-9 w-9 rounded-full bg-muted/40 p-2 text-foreground/80" />
+                <CardTitle className="text-xl">{automation.title}</CardTitle>
+                <CardDescription>{automation.description}</CardDescription>
+              </CardHeader>
+              <CardContent className="mt-auto">
+                <p className="text-sm font-medium text-primary">
+                  {automation.highlight}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Plans */}
+      <section className="container space-y-10 px-4 py-20" id="pricing">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <Badge className="w-fit rounded-full bg-muted/60 text-muted-foreground">
+              Pricing that reflects momentum
+            </Badge>
+            <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">
+              Start thoughtful, scale responsibly
+            </h2>
+          </div>
+          <p className="max-w-xl text-muted-foreground">
+            Every plan includes human onboarding, layered permissions, and
+            compliance-ready audit trails.
+          </p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          {plans.map((plan) => (
+            <Card
+              key={plan.name}
+              className={`border-border/50 ${plan.featured ? "bg-gradient-to-br from-card via-card to-primary/5 shadow-glow" : "bg-card/70"}`}
+            >
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
+                  {plan.featured && (
+                    <Badge className="rounded-full bg-primary/20 text-primary">
+                      Most picked
+                    </Badge>
+                  )}
+                </div>
+                <p className="text-lg font-semibold text-foreground">
+                  {plan.price}
+                </p>
+                <CardDescription>{plan.description}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {plan.perks.map((perk) => (
+                  <div
+                    key={perk}
+                    className="flex items-start gap-3 text-sm text-muted-foreground"
+                  >
+                    <Check className="mt-0.5 h-4 w-4 text-primary" />
+                    {perk}
+                  </div>
+                ))}
+                <Button
+                  className={`mt-4 w-full rounded-full ${plan.featured ? "bg-primary text-primary-foreground hover:bg-primary/90" : "bg-muted text-foreground hover:bg-muted/80"}`}
+                >
+                  Talk to sales
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="relative py-32 px-4">
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-secondary/5 to-transparent"></div>
-        <div className="max-w-7xl mx-auto relative">
-          <div className="text-center mb-20">
-            <Badge className="card-glass px-4 py-2 mb-6 border-0">
-              <Users className="w-4 h-4 mr-2" />
-              Customer Stories
+      <section
+        id="testimonials"
+        className="container space-y-10 px-4 py-20 sm:py-24"
+      >
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <Badge className="w-fit rounded-full bg-secondary/20 text-secondary-foreground">
+              Field notes
             </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gradient">
-              What Our Customers Say
+            <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">
+              Teams who replaced panic monitoring
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Join thousands of businesses growing with DesiLeads across India
-            </p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Rahul Sharma",
-                role: "Founder, TechStart",
-                avatar: "R",
-                testimonial: "DesiLeads helped us get 200+ qualified leads in the first month. The Hinglish responses work amazingly well!",
-                gradient: "from-primary to-primary-light"
-              },
-              {
-                name: "Priya Patel", 
-                role: "Marketing Head, EduTech",
-                avatar: "P",
-                testimonial: "The AI is incredibly smart at finding relevant conversations. Our conversion rate increased by 300%!",
-                gradient: "from-secondary to-secondary-light"
-              },
-              {
-                name: "Arjun Kumar",
-                role: "CEO, LocalBiz", 
-                avatar: "A",
-                testimonial: "Finally, a tool that understands Indian markets. The regional language support is game-changing!",
-                gradient: "from-accent to-accent-light"
-              }
-            ].map((testimonial, index) => (
-              <Card key={index} className="card-glass border-0 group hover:scale-105 transition-all duration-500">
-                <CardContent className="p-8">
-                  <div className="flex mb-6">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                    ))}
-                  </div>
-                  <p className="text-muted-foreground mb-8 leading-relaxed text-lg">
-                    "{testimonial.testimonial}"
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${testimonial.gradient} flex items-center justify-center text-white font-bold text-lg`}>
-                      {testimonial.avatar}
-                    </div>
-                    <div>
-                      <div className="font-bold text-lg">{testimonial.name}</div>
-                      <div className="text-muted-foreground">{testimonial.role}</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="relative py-32 px-4">
-        <div className="absolute top-20 left-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl animate-pulse-slow"></div>
-        <div className="absolute bottom-20 right-20 w-32 h-32 bg-secondary/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
-        
-        <div className="max-w-4xl mx-auto relative">
-          <div className="text-center mb-20">
-            <Badge className="card-glass px-4 py-2 mb-6 border-0">
-              <MessageCircle className="w-4 h-4 mr-2" />
-              Frequently Asked Questions
-            </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gradient">
-              Got Questions?
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Everything you need to know about DesiLeads and how it works
-            </p>
-          </div>
-          
-          <div className="space-y-6">
-            {[
-              {
-                question: "How does DesiLeads find relevant leads?",
-                answer: "Our AI scans Reddit, Quora, Telegram, and X for conversations matching your keywords and product description. It analyzes context, sentiment, and relevance to find high-quality leads automatically."
-              },
-              {
-                question: "Is it safe to use? Will I get banned?",
-                answer: "Safety is our top priority. DesiLeads includes spam prevention, rate limiting, and human-in-the-loop approval by default. We follow platform guidelines and use conservative posting frequencies to protect your accounts."
-              },
-              {
-                question: "What languages does DesiLeads support?",
-                answer: "DesiLeads supports English, Hindi, Hinglish, Tamil, and other Indian regional languages. Our AI is trained specifically on Indian conversation patterns and cultural context."
-              },
-              {
-                question: "How much does DesiLeads cost?",
-                answer: "We offer a free trial to get started. Our Growth plan is ₹799/month and Pro plan is ₹2,499/month. All plans include AI responses, template library, and multi-platform support."
-              },
-              {
-                question: "Can I customize the AI responses?",
-                answer: "Yes! You can create custom templates, set your brand voice, and choose from our viral template library. The AI learns your style and generates responses that match your brand personality."
-              },
-              {
-                question: "How quickly can I see results?",
-                answer: "Most customers see their first qualified leads within 24-48 hours of setup. Our AI works 24/7 to find and engage with potential customers while you focus on closing deals."
-              }
-            ].map((faq, index) => (
-              <Card key={index} className="card-glass border-0 group hover:scale-[1.02] transition-all duration-300">
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-xl bg-gradient-primary flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-white font-bold text-sm">{index + 1}</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold mb-4 text-gradient group-hover:text-glow transition-all">
-                        {faq.question}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed text-lg">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          <div className="text-center mt-16">
-            <p className="text-lg text-muted-foreground mb-6">
-              Still have questions? We're here to help!
-            </p>
-            <Button className="btn-secondary group">
-              <MessageCircle className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-              Contact Support
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative py-32 px-4 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-hero opacity-10"></div>
-        <div className="absolute top-20 left-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl animate-pulse-slow"></div>
-        <div className="absolute bottom-20 right-20 w-32 h-32 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
-        
-        <div className="max-w-5xl mx-auto relative">
-          <Badge className="card-glass px-6 py-3 mb-8 border-0 text-lg">
-            <Sparkles className="w-5 h-5 mr-2" />
-            Ready to Get Started?
-          </Badge>
-          
-          <h2 className="text-5xl md:text-7xl font-bold mb-8 text-gradient leading-tight">
-            Ready to 10x Your<br />
-            <span className="text-glow">Lead Generation?</span>
-          </h2>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-            Join 500+ businesses already using DesiLeads to grow their customer base with AI-powered lead generation
+          <p className="max-w-xl text-muted-foreground">
+            Calm interfaces and Hinglish context mean GTM leaders finally trust
+            AI to represent them in public forums.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
-            <Button size="lg" className="btn-primary text-xl px-12 py-6 rounded-2xl group">
-              <Target className="w-6 h-6 mr-2 group-hover:rotate-12 transition-transform" />
-              Start Free Trial
-            </Button>
-            <Button size="lg" className="btn-secondary text-xl px-12 py-6 rounded-2xl group">
-              <MessageSquare className="w-6 h-6 mr-2 group-hover:scale-110 transition-transform" />
-              Schedule Demo
-            </Button>
-          </div>
-          
-          <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-primary" />
-              No credit card required
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-primary" />
-              Setup in 5 minutes
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-primary" />
-              Cancel anytime
-            </div>
-          </div>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          {testimonials.map((testimonial) => (
+            <Card
+              key={testimonial.name}
+              className="border-border/40 bg-card/70 backdrop-blur"
+            >
+              <CardContent className="space-y-4 pt-6">
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  “{testimonial.quote}”
+                </p>
+                <div>
+                  <p className="text-base font-semibold text-foreground">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {testimonial.role}
+                  </p>
+                </div>
+                <p className="text-sm font-semibold text-primary">
+                  {testimonial.metric}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="relative bg-background/50 backdrop-blur-xl border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-            {/* Brand */}
-            <div className="md:col-span-1">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-glow">
-                  <Sparkles className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-2xl font-bold text-gradient">DesiLeads</span>
-              </div>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                AI-powered lead generation platform designed for Indian businesses. Get customers from Reddit, Quora, Telegram & X with intelligent automation.
+      {/* FAQ / CTA */}
+      <section id="faq" className="container px-4 pb-24">
+        <Card className="overflow-hidden border-border/40 bg-card/70">
+          <div className="grid gap-8 md:grid-cols-[1.4fr,0.6fr]">
+            <div className="space-y-6 p-8">
+              <Badge className="rounded-full bg-muted/60 text-muted-foreground">
+                What happens after the demo?
+              </Badge>
+              <h3 className="text-3xl font-semibold">
+                We sit in your workflows for two weeks and prove channel-market
+                fit together.
+              </h3>
+              <ul className="space-y-4 text-sm text-muted-foreground">
+                <li className="flex gap-2">
+                  <Sparkles className="mt-0.5 h-4 w-4 text-primary" />
+                  Day 1-3 · Map audiences, keywords, guardrails, and tone.
+                </li>
+                <li className="flex gap-2">
+                  <Zap className="mt-0.5 h-4 w-4 text-primary" />
+                  Day 4-9 · Monitor, score, and co-draft every response with
+                  your team.
+                </li>
+                <li className="flex gap-2">
+                  <ShieldCheck className="mt-0.5 h-4 w-4 text-primary" />
+                  Day 10-14 · Automate hand-offs, document governance, and
+                  unlock team seats.
+                </li>
+              </ul>
+            </div>
+            <div className="flex flex-col justify-between border-t border-border/40 bg-background-secondary/60 p-8 md:border-l md:border-t-0">
+              <p className="text-sm text-muted-foreground">
+                We only onboard five teams per month to keep research quality
+                high.
               </p>
-              <div className="flex space-x-4">
-                <Button size="sm" className="btn-secondary">
-                  <MessageCircle className="w-4 h-4" />
+              <div className="space-y-3">
+                <Button className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
+                  Reserve a slot
                 </Button>
-                <Button size="sm" className="btn-secondary">
-                  <Users className="w-4 h-4" />
+                <Button variant="ghost" className="w-full rounded-full">
+                  Download the onboarding brief
                 </Button>
-                <Button size="sm" className="btn-secondary">
-                  <Target className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-
-            {/* Product */}
-            <div>
-              <h3 className="text-lg font-semibold mb-6 text-gradient">Product</h3>
-              <ul className="space-y-4">
-                <li><a href="#features" className="text-muted-foreground hover:text-gradient transition-colors">Features</a></li>
-                <li><a href="#pricing" className="text-muted-foreground hover:text-gradient transition-colors">Pricing</a></li>
-                <li><a href="#templates" className="text-muted-foreground hover:text-gradient transition-colors">Templates</a></li>
-                <li><a href="#integrations" className="text-muted-foreground hover:text-gradient transition-colors">Integrations</a></li>
-                <li><a href="#api" className="text-muted-foreground hover:text-gradient transition-colors">API</a></li>
-              </ul>
-            </div>
-
-            {/* Company */}
-            <div>
-              <h3 className="text-lg font-semibold mb-6 text-gradient">Company</h3>
-              <ul className="space-y-4">
-                <li><a href="#about" className="text-muted-foreground hover:text-gradient transition-colors">About Us</a></li>
-                <li><a href="#careers" className="text-muted-foreground hover:text-gradient transition-colors">Careers</a></li>
-                <li><a href="#blog" className="text-muted-foreground hover:text-gradient transition-colors">Blog</a></li>
-                <li><a href="#press" className="text-muted-foreground hover:text-gradient transition-colors">Press Kit</a></li>
-                <li><a href="#partners" className="text-muted-foreground hover:text-gradient transition-colors">Partners</a></li>
-              </ul>
-            </div>
-
-            {/* Support */}
-            <div>
-              <h3 className="text-lg font-semibold mb-6 text-gradient">Support</h3>
-              <ul className="space-y-4">
-                <li><a href="#help" className="text-muted-foreground hover:text-gradient transition-colors">Help Center</a></li>
-                <li><a href="#contact" className="text-muted-foreground hover:text-gradient transition-colors">Contact Us</a></li>
-                <li><a href="#status" className="text-muted-foreground hover:text-gradient transition-colors">System Status</a></li>
-                <li><a href="#security" className="text-muted-foreground hover:text-gradient transition-colors">Security</a></li>
-                <li><a href="#compliance" className="text-muted-foreground hover:text-gradient transition-colors">Compliance</a></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Section */}
-          <div className="border-t border-white/10 mt-12 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
-                <p className="text-muted-foreground text-sm">
-                  © 2024 DesiLeads. All rights reserved.
-                </p>
-                <div className="flex space-x-6 text-sm">
-                  <a href="#privacy" className="text-muted-foreground hover:text-gradient transition-colors">Privacy Policy</a>
-                  <a href="#terms" className="text-muted-foreground hover:text-gradient transition-colors">Terms of Service</a>
-                  <a href="#cookies" className="text-muted-foreground hover:text-gradient transition-colors">Cookie Policy</a>
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-4 mt-6 md:mt-0">
-                <Badge className="card-glass px-3 py-1 border-0">
-                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                  All systems operational
-                </Badge>
-                <p className="text-sm text-muted-foreground">
-                  Made with ❤️ in India
-                </p>
               </div>
             </div>
           </div>
-        </div>
-      </footer>
+        </Card>
+      </section>
     </div>
   );
 };

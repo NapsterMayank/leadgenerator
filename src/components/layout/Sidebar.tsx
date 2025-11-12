@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import { 
+import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import {
   LayoutDashboard,
   Target,
   Inbox,
@@ -17,8 +17,8 @@ import {
   Shield,
   Database,
   HelpCircle,
-  Activity
-} from 'lucide-react';
+  Activity,
+} from "lucide-react";
 
 interface SidebarProps {
   className?: string;
@@ -26,98 +26,98 @@ interface SidebarProps {
 
 const dashboardNavItems = [
   {
-    title: 'Overview',
-    href: '/dashboard',
+    title: "Overview",
+    href: "/dashboard",
     icon: LayoutDashboard,
   },
   {
-    title: 'Campaigns',
-    href: '/dashboard/campaigns',
+    title: "Campaigns",
+    href: "/dashboard/campaigns",
     icon: Target,
   },
   {
-    title: 'Leads Inbox',
-    href: '/dashboard/leads',
+    title: "Leads Inbox",
+    href: "/dashboard/leads",
     icon: Inbox,
   },
   {
-    title: 'Templates',
-    href: '/dashboard/templates',
+    title: "Templates",
+    href: "/dashboard/templates",
     icon: FileText,
   },
   {
-    title: 'Scheduling',
-    href: '/dashboard/scheduling',
+    title: "Scheduling",
+    href: "/dashboard/scheduling",
     icon: Calendar,
   },
   {
-    title: 'Analytics',
-    href: '/dashboard/analytics',
+    title: "Analytics",
+    href: "/dashboard/analytics",
     icon: BarChart3,
   },
   {
-    title: 'Integrations',
-    href: '/dashboard/integrations',
+    title: "Integrations",
+    href: "/dashboard/integrations",
     icon: Settings,
   },
   {
-    title: 'Billing',
-    href: '/dashboard/billing',
+    title: "Billing",
+    href: "/dashboard/billing",
     icon: CreditCard,
   },
 ];
 
 const adminNavItems = [
   {
-    title: 'Dashboard',
-    href: '/admin',
+    title: "Dashboard",
+    href: "/admin",
     icon: LayoutDashboard,
   },
   {
-    title: 'Users',
-    href: '/admin/users',
+    title: "Users",
+    href: "/admin/users",
     icon: Users,
   },
   {
-    title: 'Billing',
-    href: '/admin/billing',
+    title: "Billing",
+    href: "/admin/billing",
     icon: CreditCard,
   },
   {
-    title: 'Content Moderation',
-    href: '/admin/moderation',
+    title: "Content Moderation",
+    href: "/admin/moderation",
     icon: Shield,
   },
   {
-    title: 'Templates',
-    href: '/admin/templates',
+    title: "Templates",
+    href: "/admin/templates",
     icon: FileText,
   },
   {
-    title: 'Integrations',
-    href: '/admin/integrations',
+    title: "Integrations",
+    href: "/admin/integrations",
     icon: Database,
   },
   {
-    title: 'Analytics',
-    href: '/admin/analytics',
+    title: "Analytics",
+    href: "/admin/analytics",
     icon: BarChart3,
   },
   {
-    title: 'Support',
-    href: '/admin/support',
+    title: "Support",
+    href: "/admin/support",
     icon: HelpCircle,
   },
   {
-    title: 'Audit Logs',
-    href: '/admin/audit',
+    title: "Audit Logs",
+    href: "/admin/audit",
     icon: Activity,
   },
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ className }) => {
   const pathname = usePathname();
-  const isAdmin = pathname.startsWith('/admin');
+  const isAdmin = pathname.startsWith("/admin");
   const navItems = isAdmin ? adminNavItems : dashboardNavItems;
 
   return (
@@ -133,8 +133,8 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
                   href={item.href}
                   className={cn(
                     "flex items-center rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors",
-                    isActive 
-                      ? "bg-gradient-primary text-white shadow-glow" 
+                    isActive
+                      ? "bg-gradient-primary text-white shadow-glow"
                       : "text-muted-foreground"
                   )}
                 >

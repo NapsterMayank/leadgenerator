@@ -1,59 +1,73 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Checkbox } from '@/components/ui/checkbox';
-import { useAuth } from '@/contexts/AuthContext';
-import { Eye, EyeOff, Mail, Lock, User, AlertCircle, CheckCircle } from 'lucide-react';
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  User,
+  AlertCircle,
+  CheckCircle,
+} from "lucide-react";
 
 const Signup: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const { signup } = useAuth();
   const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
   const validateForm = () => {
     if (!formData.name.trim()) {
-      setError('Name is required');
+      setError("Name is required");
       return false;
     }
     if (!formData.email.trim()) {
-      setError('Email is required');
+      setError("Email is required");
       return false;
     }
     if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters');
+      setError("Password must be at least 6 characters");
       return false;
     }
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return false;
     }
     if (!agreedToTerms) {
-      setError('Please agree to the terms and conditions');
+      setError("Please agree to the terms and conditions");
       return false;
     }
     return true;
@@ -61,16 +75,16 @@ const Signup: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!validateForm()) return;
 
     setIsLoading(true);
     try {
       await signup(formData.email, formData.password, formData.name);
-      router.push('/dashboard');
+      router.push("/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Signup failed');
+      setError(err instanceof Error ? err.message : "Signup failed");
     } finally {
       setIsLoading(false);
     }
@@ -78,7 +92,7 @@ const Signup: React.FC = () => {
 
   const handleGoogleSignup = () => {
     // Placeholder for Google OAuth integration
-    alert('Google OAuth integration coming soon!');
+    alert("Google OAuth integration coming soon!");
   };
 
   const passwordStrength = (password: string) => {
@@ -94,15 +108,15 @@ const Signup: React.FC = () => {
     switch (strength) {
       case 0:
       case 1:
-        return { text: 'Weak', color: 'text-destructive' };
+        return { text: "Weak", color: "text-destructive" };
       case 2:
-        return { text: 'Fair', color: 'text-yellow-500' };
+        return { text: "Fair", color: "text-yellow-500" };
       case 3:
-        return { text: 'Good', color: 'text-blue-500' };
+        return { text: "Good", color: "text-blue-500" };
       case 4:
-        return { text: 'Strong', color: 'text-green-500' };
+        return { text: "Strong", color: "text-green-500" };
       default:
-        return { text: '', color: '' };
+        return { text: "", color: "" };
     }
   };
 
@@ -124,7 +138,9 @@ const Signup: React.FC = () => {
 
         <Card className="card-elegant">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">Create your account</CardTitle>
+            <CardTitle className="text-2xl font-bold">
+              Create your account
+            </CardTitle>
             <CardDescription>
               Start your 7-day free trial and find your first customers
             </CardDescription>
@@ -179,7 +195,7 @@ const Signup: React.FC = () => {
                   <Input
                     id="password"
                     name="password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     placeholder="Create a password"
                     value={formData.password}
                     onChange={handleInputChange}
@@ -207,12 +223,14 @@ const Signup: React.FC = () => {
                         <div
                           key={i}
                           className={`h-1 w-6 rounded-full ${
-                            i < strength ? 'bg-primary' : 'bg-muted'
+                            i < strength ? "bg-primary" : "bg-muted"
                           }`}
                         />
                       ))}
                     </div>
-                    <span className={strengthInfo.color}>{strengthInfo.text}</span>
+                    <span className={strengthInfo.color}>
+                      {strengthInfo.text}
+                    </span>
                   </div>
                 )}
               </div>
@@ -224,7 +242,7 @@ const Signup: React.FC = () => {
                   <Input
                     id="confirmPassword"
                     name="confirmPassword"
-                    type={showConfirmPassword ? 'text' : 'password'}
+                    type={showConfirmPassword ? "text" : "password"}
                     placeholder="Confirm your password"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
@@ -244,9 +262,10 @@ const Signup: React.FC = () => {
                       <Eye className="h-4 w-4 text-muted-foreground" />
                     )}
                   </Button>
-                  {formData.confirmPassword && formData.password === formData.confirmPassword && (
-                    <CheckCircle className="absolute right-10 top-3 h-4 w-4 text-green-500" />
-                  )}
+                  {formData.confirmPassword &&
+                    formData.password === formData.confirmPassword && (
+                      <CheckCircle className="absolute right-10 top-3 h-4 w-4 text-green-500" />
+                    )}
                 </div>
               </div>
 
@@ -254,26 +273,28 @@ const Signup: React.FC = () => {
                 <Checkbox
                   id="terms"
                   checked={agreedToTerms}
-                  onCheckedChange={(checked) => setAgreedToTerms(checked as boolean)}
+                  onCheckedChange={(checked) =>
+                    setAgreedToTerms(checked as boolean)
+                  }
                 />
                 <Label htmlFor="terms" className="text-sm leading-relaxed">
-                  I agree to the{' '}
+                  I agree to the{" "}
                   <Link href="#" className="text-primary hover:text-primary/80">
                     Terms of Service
-                  </Link>{' '}
-                  and{' '}
+                  </Link>{" "}
+                  and{" "}
                   <Link href="#" className="text-primary hover:text-primary/80">
                     Privacy Policy
                   </Link>
                 </Label>
               </div>
 
-              <Button 
-                type="submit" 
-                className="w-full btn-primary" 
+              <Button
+                type="submit"
+                className="w-full btn-primary"
                 disabled={isLoading}
               >
-                {isLoading ? 'Creating account...' : 'Start Free Trial'}
+                {isLoading ? "Creating account..." : "Start Free Trial"}
               </Button>
             </form>
 
@@ -288,9 +309,9 @@ const Signup: React.FC = () => {
               </div>
             </div>
 
-            <Button 
-              variant="outline" 
-              className="w-full" 
+            <Button
+              variant="outline"
+              className="w-full"
               onClick={handleGoogleSignup}
             >
               <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -315,9 +336,9 @@ const Signup: React.FC = () => {
             </Button>
 
             <div className="text-center text-sm text-muted-foreground">
-              Already have an account?{' '}
-              <Link 
-                href="/auth/login" 
+              Already have an account?{" "}
+              <Link
+                href="/auth/login"
                 className="text-primary hover:text-primary/80 transition-colors font-medium"
               >
                 Sign in
@@ -326,7 +347,9 @@ const Signup: React.FC = () => {
 
             {/* Trial Benefits */}
             <div className="mt-6 p-4 bg-muted/50 rounded-lg">
-              <p className="text-sm font-medium text-center mb-3">Your 7-day free trial includes:</p>
+              <p className="text-sm font-medium text-center mb-3">
+                Your 7-day free trial includes:
+              </p>
               <ul className="text-xs text-muted-foreground space-y-1">
                 <li className="flex items-center">
                   <CheckCircle className="h-3 w-3 text-primary mr-2" />
